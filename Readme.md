@@ -35,7 +35,7 @@ Like all great works of art, this library was written because I can up with a pu
 * Having a bulky "shared" .jar for things different apps share
 
 ## How to run your own server
-If you want to run your own Komiform server, you are very free to do so! Check out the Readme in the `server` directory.
+The server is using Docker. Have it installed, and then run `$ make` in the root of this project.
 
 ## Honourable mentions
 * `justin_smith` @ freenode irc, for always being there and answering peoples questions. What a champion!
