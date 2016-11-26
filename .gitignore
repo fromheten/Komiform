@@ -1,0 +1,13 @@
+server/target
+server/classes
+server/checkouts
+server/repo
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.lein-*
+.nrepl-port
+.hgignore
+.hg/
+.DS_Store
