@@ -3,7 +3,7 @@
   (:require [org.httpkit.client]
             [clojure.java.io]))
 
-(def ^:private server-default (str "http://komiform.top/form"))
+(def ^:private server-default (str "http://www.komiform.top/form"))
 (def ^:private cache-location (str (System/getProperty "user.home")
                                    "/.komiform/cache/"))
 (defn init! []
