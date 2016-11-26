@@ -5,4 +5,4 @@
 (deftest base64sha256-tests
   (testing "creating a base64 encoded sha256 hash"
     (is (= (sha256-base64 "hello")
-           "LPJNul+wow4m6DsqxbninhsWHlwfp0JecwQzYpOLmCQ="))))
+           "LPJNul-wow4m6DsqxbninhsWHlwfp0JecwQzYpOLmCQ="))))

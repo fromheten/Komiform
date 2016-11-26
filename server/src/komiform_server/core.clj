@@ -9,15 +9,23 @@
 (def persistent-storage-location "/tmp/komiform/")
 (def port 3000)
 
+(defn base64-for-urls
+  [base64]
+  (-> base64
+      (clojure.string/replace #"\+" "-")
+      (clojure.string/replace #"\/" "_")
+      (clojure.string/replace #"\\0" ".0")))
+
 (defn sha256-base64
   ([input] (sha256-base64 input "SHA-256"))
   ([input hash-algo]
    {:pre (string? input)
     :post (string? %)}
-   (let [hash (MessageDigest/getInstance hash-algo)]
-     (. hash update (.getBytes input))
-     (let [digest (.digest hash)]
-       (String. (.encode (java.util.Base64/getEncoder) digest))))))
+   (base64-for-urls
+    (let [hash (MessageDigest/getInstance hash-algo)]
+      (. hash update (.getBytes input))
+      (let [digest (.digest hash)]
+        (String. (.encode (java.util.Base64/getEncoder) digest)))))))
 
 (defn persist-form!
   [form]
