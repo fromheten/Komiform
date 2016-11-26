@@ -2,13 +2,13 @@
   (:require [clojure.test :refer :all]
             [komiform.core :refer :all]))
 
-(def local-publish! (partial komiform.core/publish! "http://localhost:3000"))
+(def local-publish! (partial komiform.core/publish! "http://localhost/"))
 
 (def dec-two-form '(fn dec-two [n] (dec (dec n))))
 
 (deftest publish!-tests
   (testing "Uploading a form gives a hash"
-    (is (= "swD89XC+fwzyo2hrng6dYrUlFCoabZaivE8gPTqneZw="
+    (is (= "swD89XC-fwzyo2hrng6dYrUlFCoabZaivE8gPTqneZw="
            @(publish! dec-two-form)))))
 
 (deftest get-form-tests
