@@ -44,6 +44,6 @@
 
 (defn -main [& args]
   (println "Hello, World!")
-  (.mkdir (clojure.java.io/file persistent-storage-location))
+  (.mkdirs (clojure.java.io/file persistent-storage-location))
   (org.httpkit.server/run-server app {:port port})
   (println (str "Server on port " port)))

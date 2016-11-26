@@ -14,5 +14,6 @@
 (deftest get-form-tests
   (testing "Getting and running a form saved earlier"
     (is (= 2
-           (@(get-form @(publish! dec-two-form))
+           (@(get-form
+              @(publish! dec-two-form))
             4)))))
