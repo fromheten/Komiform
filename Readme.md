@@ -1,16 +1,29 @@
 # Komiform
 ## A Better Way to do Dependencies
 
-It might be true that the two only problems in computing are cache invalidation and naming things. Both problems are solved by not using names - but instead hashes.
+Komiform is a library for sharing code.
+
+Until now the smallest unit of code being shared is "library". Komiform aims to change that, and make it so that the smallest unit of code to share is the function, or even a form.
+
+It has 2 functions of intrest - `publish!` and `get-form`.
+
+* `publish!` takes a Clojure form and uploads it, giving you a hash of the form back. The hash is the globally unique ID of your form. No 2 forms can ever have the same ID. That is why hashes are better than names, for identification.
+
+* `get-form` takes a hash and returns the form, evaluated. It keeps a local cache, so you only ever do one network request (much like Maven does in `~/.m2`).
 
 ## TL;DR
 ``` clojure
 (require 'komiform.core :refer [get-form publish!])
-;; Actually the default if you call publish! with only one argument - but with 2 args you can customize it
-(def publish! (partial komiform.core/publish! "http://db.komiform.code"))
 (publish! '(fn add2 [n] (+ 2 n))) ;=> "KTewcBHxQ8GFaNQ96IHfp72YtTM7BY90YccmiaGka94"
-;; Boom! Quick and easy code reuse - no uploading packages anywhere
-(@(komiform.core/get-form "http://db.komiform.code" "KTewcBHxQ8GFaNQ96IHfp72YtTM7BY90YccmiaGka94") 5) ;=> 7
+(let [add2 @(komiform.core/get-form "KTewcBHxQ8GFaNQ96IHfp72YtTM7BY90YccmiaGka94")]
+  (add2 5)) ;=> 7
+```
+
+## Installation
+
+In `project.clj` or `build.boot`
+```
+[komiform "1.0.0"]
 ```
 
 ## What's in a name?
@@ -20,9 +33,6 @@ Like all great works of art, this library was written because I can up with a pu
 * Never again copy-paste code - not even when you are lazy
 * Semver
 * Having a bulky "shared" .jar for things different apps share
-
-## Lost and Fund
-I run a server providing forms. It's basically a programmatic pastebin. It costs some money, and if you like my library, please donate. I will publish more information on this later.
 
 ## How to run your own server
 If you want to run your own Komiform server, you are very free to do so! Check out the Readme in the `server` directory.
