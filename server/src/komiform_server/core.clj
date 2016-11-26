@@ -7,6 +7,7 @@
   (:import [java.security MessageDigest]))
 
 (def persistent-storage-location "/tmp/komiform/")
+(def port 3000)
 
 (defn sha256-base64
   ([input] (sha256-base64 input "SHA-256"))
@@ -27,7 +28,7 @@
   ;; return base64-hash
   (let [base64hash (sha256-base64 form)
         file-path (str persistent-storage-location base64hash)]
-    (when (not (.exists (clojure.java.io/file file-path)))
+    (when (not (.exists (clojure.java.io/as-file file-path)))
       (spit file-path form))
     base64hash))
 
@@ -43,11 +44,6 @@
 
 (defn -main [& args]
   (println "Hello, World!")
-  (org.httpkit.server/run-server app {:port 3000}))
-
-;; (server)
-;; (def server (-main))
-
-;; (require 'org.httpkit.client)
-;; @(org.httpkit.client/post "http://localhost:3000/form"
-;;                           {:body (str '(fn add2 [n] (inc (inc 2))))})
+  (.mkdir (clojure.java.io/file persistent-storage-location))
+  (org.httpkit.server/run-server app {:port port})
+  (println (str "Server on port " port)))
