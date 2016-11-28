@@ -3,8 +3,6 @@
 
 Komiform is a library for sharing code.
 
-Until now the smallest unit of code being shared is "library". Komiform aims to change that, and make it so that the smallest unit of code to share is the function, or even a form.
-
 It has 2 functions of intrest - `publish!` and `get-form`.
 
 * `publish!` takes a Clojure form and uploads it, giving you a hash of the form back. The hash is the globally unique ID of your form. No 2 forms can ever have the same ID. That is why hashes are better than names, for identification.

@@ -1,4 +1,4 @@
-(defproject komiform "1.0.0"
+(defproject komiform "1.0.0-SNAPSHOT"
   :description "A Better way to do Dependencies"
   ;;:url "http://example.com/FIXME"
   :license {:name "GNU GPL v3"
