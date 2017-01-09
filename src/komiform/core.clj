@@ -3,7 +3,7 @@
   (:require [org.httpkit.client]
             [clojure.java.io]))
 
-(def ^:private server-default (str "http://www.komiform.top/form"))
+(def ^:private server-default (str "https://www.komiform.top/form"))
 (def ^:private cache-location (str (System/getProperty "user.home")
                                    "/.komiform/cache/"))
 (defn init! []
@@ -21,16 +21,23 @@
 (defn cache-persist! [hash body]
   (spit (str cache-location hash) body))
 
+(defn begins-with-https? [uri]
+  (or (re-find #"^https:\/\/" uri)
+      (= "http://localhost:3000/form" uri)))
+
 (defn publish!
   ([form] (publish! server-default form))
-  ([server-uri form] (future (:body @(org.httpkit.client/post server-uri
-                                                              {:body (str form)})))))
+  ([server-uri form]
+   (assert (begins-with-https? server-uri) "server-uri must use https")
+   (future (:body @(org.httpkit.client/post server-uri
+                                            {:body (str form)})))))
 
 (defn get-form
   "LISP <3"
   ([hash] (get-form server-default hash))
   ([server-uri hash]
    {:post [(future? %)]}
+   (assert (begins-with-https? server-uri) "server-uri must use https")
    (future
      (eval
       (read-string

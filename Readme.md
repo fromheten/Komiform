@@ -20,12 +20,15 @@ It has 2 functions of intrest - `publish!` and `get-form`.
 ## Installation
 
 In `project.clj` or `build.boot`
-```
-[komiform "1.0.0"]
-```
+
+[![Clojars Project](https://img.shields.io/clojars/v/komiform.svg)](https://clojars.org/komiform)
+
 
 ## What's in a name?
 Like all great works of art, this library was written because I can up with a pun for the name. "Kom i form" means "get in shape" in Swedish, which I thought was funny because the library is about handling forms in a blazing fast way.
+
+## Testing
+To run the test, you need to run the [Komiform Server](https://github.com/fromheten/komiform-server) locally, so that the Clojure server is available at `http://localhost:3000`.
 
 ## Problems you no longer suffer
 * Never again copy-paste code - not even when you are lazy
@@ -34,3 +37,4 @@ Like all great works of art, this library was written because I can up with a pu
 
 ## Honourable mentions
 * `justin_smith` @ freenode irc, for always being there and answering peoples questions. What a champion!
+* [Joe Armstrong](https://joearms.github.io/) of Ericsson fame for inspiration on why names suck as identifiers
